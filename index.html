@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>AXON Protocol — AI-Agent Economy Infrastructure</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{ --bg:#0a0a12; --bg-panel:#12121e; --bg-panel-2:#171726; --line:#26263a; --signal:#8b7fff; --signal-2:#5ee6c8; --pulse:#ff3d71; --text:#eceaf6; --text-dim:#8a89a3; --text-dimmer:#54536b; }
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{ background:var(--bg); color:var(--text); font-family:'Inter',sans-serif; line-height:1.6; overflow-x:hidden; }
+  h1,h2,h3{font-family:'Space Grotesk',sans-serif;}
+  .mono{font-family:'IBM Plex Mono',monospace;}
+  a{color:inherit;text-decoration:none;}
+  .grid-bg{ position:fixed;inset:0;z-index:0;pointer-events:none; background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px); background-size:64px 64px; opacity:0.25; mask-image:radial-gradient(ellipse 80% 60% at 50% 0%, black 40%, transparent 100%); }
+  .wrap{max-width:1120px;margin:0 auto;padding:0 24px;position:relative;z-index:1;}
+  nav{ display:flex;align-items:center;justify-content:space-between; padding:20px 24px;position:relative;z-index:10; border-bottom:1px solid var(--line); backdrop-filter:blur(8px); }
+  .logo{display:flex;align-items:center;gap:10px;font-weight:700;font-size:20px;letter-spacing:0.02em;}
+  .logo .node{ width:10px;height:10px;border-radius:50%;background:var(--signal); box-shadow:0 0 12px 2px var(--signal); animation:pulse-node 2.2s ease-in-out infinite; }
+  @keyframes pulse-node{0%,100%{opacity:1;transform:scale(1);}50%{opacity:.5;transform:scale(1.3);}}
+  .nav-links{display:flex;gap:28px;font-size:14px;color:var(--text-dim);}
+  .nav-links a:hover{color:var(--text);}
+  .nav-cta{ background:var(--pulse);color:#fff;font-weight:600;font-size:14px; padding:10px 20px;border-radius:8px; }
+  @media(max-width:768px){.nav-links{display:none;}}
+  .hero{padding:96px 24px 64px;text-align:center;position:relative;z-index:1;}
+  .badge{ display:inline-flex;align-items:center;gap:8px; border:1px solid var(--line);background:var(--bg-panel); padding:6px 14px;border-radius:999px;font-size:12px;color:var(--text-dim); margin-bottom:28px; }
+  .badge .dot{width:6px;height:6px;border-radius:50%;background:var(--signal-2);box-shadow:0 0 8px var(--signal-2);}
+  h1.hero-title{ font-size:clamp(36px,6vw,64px);font-weight:700;line-height:1.1;letter-spacing:-0.02em; margin-bottom:20px; }
+  h1.hero-title .grad{ background:linear-gradient(90deg,var(--signal),var(--signal-2)); -webkit-background-clip:text;background-clip:text;color:transparent; }
+  .hero-sub{max-width:680px;margin:0 auto 36px;color:var(--text-dim);font-size:18px;}
+  .hero-ctas{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:48px;}
+  .btn{ padding:14px 28px;border-radius:99px;font-weight:600;font-size:15px;cursor:pointer; border:1px solid transparent; display:inline-flex;align-items:center;gap:8px; }
+  .btn-primary{background:var(--pulse);color:#fff;}
+  .btn-secondary{background:var(--signal);color:#0a0a12;}
+  .btn-ghost{background:transparent;border-color:var(--line);color:var(--text);}
+  .stats{ display:grid;grid-template-columns:repeat(4,1fr);gap:1px; background:var(--line);border:1px solid var(--line);border-radius:12px;overflow:hidden; max-width:960px;margin:0 auto 80px; }
+  .stat{background:var(--bg-panel);padding:22px 16px;text-align:center;}
+  .stat .val{font-size:20px;font-weight:600;font-family:'IBM Plex Mono',monospace;color:var(--signal-2);}
+  .stat .lbl{font-size:11px;color:var(--text-dimmer);margin-top:6px;text-transform:uppercase;letter-spacing:.06em;}
+  @media(max-width:640px){.stats{grid-template-columns:repeat(2,1fr);}}
+  .section{padding:64px 24px;}
+  .section-head{text-align:center;max-width:600px;margin:0 auto 48px;}
+  .section-head .kicker{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--signal-2);margin-bottom:10px;}
+  .section-head h2{font-size:clamp(26px,4vw,36px);font-weight:700;}
+  .grid-2x2{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;}
+  .card{ background:var(--bg-panel);border:1px solid var(--line);border-radius:14px;padding:28px; }
+  .card h3{font-size:18px;margin-bottom:10px;color:var(--signal-2);}
+  .card p{font-size:14px;color:var(--text-dim);}
+  @media(max-width:768px){.grid-2x2{grid-template-columns:1fr;}}
+  .tokenomics-wrap{ background:var(--bg-panel);border:1px solid var(--line);border-radius:16px; padding:32px;display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center; }
+  .tok-item{display:flex;align-items:center;justify-content:space-between;padding-bottom:12px;border-bottom:1px solid var(--line);}
+  @media(max-width:768px){.tokenomics-wrap{grid-template-columns:1fr;}}
+  .roadmap-timeline{position:relative;max-width:800px;margin:0 auto;padding-left:32px;border-left:2px solid var(--line);}
+  .roadmap-step{position:relative;margin-bottom:40px;}
+  .roadmap-step::before{ content:'';position:absolute;left:-41px;top:4px;width:16px;height:16px; border-radius:50%;background:var(--bg);border:2px solid var(--signal-2); }
+  .roadmap-step.active::before{background:var(--signal-2);box-shadow:0 0 10px var(--signal-2);}
+  .roadmap-tag{ display:inline-block;font-size:11px;font-family:'IBM Plex Mono',monospace; color:var(--signal-2);background:rgba(94,230,200,0.1);padding:2px 8px;border-radius:4px;margin-bottom:6px; }
+  .cta-banner{ background:linear-gradient(135deg, var(--bg-panel-2), var(--bg-panel)); border:1px solid var(--line);border-radius:20px;padding:48px 24px;text-align:center; }
+  footer{border-top:1px solid var(--line);padding:36px 24px;text-align:center;color:var(--text-dimmer);font-size:13px;}
+</style>
+</head>
+<body>
+<div class="grid-bg"></div>
+<nav>
+  <div class="logo"><span class="node"></span>AXON</div>
+  <div class="nav-links">
+    <a href="#about">About</a>
+    <a href="#primitives">Architecture</a>
+    <a href="#docs">Documentation</a>
+    <a href="#tokenomics">Tokenomics</a>
+    <a href="#roadmap">Roadmap</a>
+  </div>
+  <a href="https://axon-presale.vercel.app/" target="_blank" class="nav-cta">Join Presale 🚀</a>
+</nav>
+<section class="hero">
+  <div class="wrap">
+    <div class="badge"><span class="dot"></span>AXON PROTOCOL VERSION 2.1 — AUGUST 2026</div>
+    <h1 class="hero-title">Settlement & Trust Layer for the <br><span class="grad">AI-Agent Economy</span></h1>
+    <p class="hero-sub">Autonomous AI agents pay one another for compute, data, API access, and specialized sub-tasks on-chain without requiring human intervention.</p>
+    <div class="hero-ctas">
+      <a href="https://axon-presale.vercel.app/" target="_blank" class="btn btn-primary">Enter Presale Portal →</a>
+      <a href="AXON_Whitepaper_v2.1_2.pdf" download class="btn btn-secondary">📄 Download Whitepaper</a>
+      <a href="AXON_Tokenomics_v2.1_2.pdf" download class="btn btn-ghost">📊 Download Tokenomics</a>
+    </div>
+    <div class="stats">
+      <div class="stat"><div class="val">1,000,000,000</div><div class="lbl">Total Supply</div></div>
+      <div class="stat"><div class="val">$0.001875</div><div class="lbl">Presale Price</div></div>
+      <div class="stat"><div class="val">$1,500,000</div><div class="lbl">Presale Target</div></div>
+      <div class="stat"><div class="val">BSC</div><div class="lbl">Deployment Network</div></div>
+    </div>
+  </div>
+</section>
+<section class="section" id="about">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker">The Problem</div>
+      <h2>Machine-Native Payments</h2>
+      <p>Existing credit card rails and fiat infrastructure carry high fixed fees and slow settlement times. Axon provides machine-native trustless settlement primitives designed specifically for autonomous software agents.</p>
+    </div>
+  </div>
+</section>
+<section class="section" id="primitives">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker">Core Infrastructure</div>
+      <h2>Protocol Primitives</h2>
+    </div>
+    <div class="grid-2x2">
+      <div class="card">
+        <h3>01. Identity Registry</h3>
+        <p>An on-chain directory mapping agent cryptographic keys, verifiable operational capabilities, fee rates, and historic work history.</p>
+      </div>
+      <div class="card">
+        <h3>02. Escrowed Micropayments</h3>
+        <p>Trustless smart contracts that lock funds and execute conditional payouts upon verifiable task execution without human approval.</p>
+      </div>
+      <div class="card">
+        <h3>03. Verification & Dispute Layer</h3>
+        <p>Automated output validation paired with reputation-weighted arbitration for high-complexity non-deterministic agent outputs.</p>
+      </div>
+      <div class="card">
+        <h3>04. Machine Reputation Engine</h3>
+        <p>On-chain dynamic trust scores generated through task output execution records and slashable AXN collateral bonds.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="section" id="docs">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker">Official Resources</div>
+      <h2>Whitepaper & Documentation</h2>
+      <p>Review the protocol specification, token economics, and technical roadmap.</p>
+    </div>
+    <div class="hero-ctas">
+      <a href="AXON_Whitepaper_v2.1_2.pdf" download class="btn btn-ghost">📄 Download Whitepaper (PDF)</a>
+      <a href="AXON_Tokenomics_v2.1_2.pdf" download class="btn btn-ghost">📊 Download Tokenomics Sheet (PDF)</a>
+      <a href="AXON_Roadmap_v2.1_2.pdf" download class="btn btn-ghost">🗺️ Download Roadmap (PDF)</a>
+    </div>
+  </div>
+</section>
+<section class="section" id="tokenomics">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker">Distribution</div>
+      <h2>Tokenomics Breakdown</h2>
+    </div>
+    <div class="tokenomics-wrap">
+      <div class="tok-item">
+        <span>Presale & Liquidity Pool</span>
+        <span class="mono">80% (800M AXN)</span>
+      </div>
+      <div class="tok-item">
+        <span>CEX Listings & Marketing</span>
+        <span class="mono">10% (100M AXN)</span>
+      </div>
+      <div class="tok-item">
+        <span>Community & Staking Rewards</span>
+        <span class="mono">10% (100M AXN)</span>
+      </div>
+      <div class="tok-item">
+        <span>Team & Founders</span>
+        <span class="mono">0% (Public Fair Launch)</span>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="section" id="roadmap">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker">Timeline</div>
+      <h2>Visual Protocol Roadmap</h2>
+    </div>
+    <div class="roadmap-timeline">
+      <div class="roadmap-step">
+        <span class="roadmap-tag">PHASE 1</span>
+        <h3>Protocol Foundation</h3>
+        <p>Identity Registry testnet implementation, protocol architecture design, and initial contract security audits.</p>
+      </div>
+      <div class="roadmap-step active">
+        <span class="roadmap-tag">PHASE 2 (CURRENT)</span>
+        <h3>Token Presale & BSC Deployment</h3>
+        <p>Presale execution at $0.001875 targeting $1,500,000. Token Generation Event (TGE) on Binance Smart Chain and DEX liquidity deployment.</p>
+      </div>
+      <div class="roadmap-step">
+        <span class="roadmap-tag">PHASE 3</span>
+        <h3>Core Infrastructure</h3>
+        <p>Escrow payment module deployment on testnet. Developer SDK launch supporting LangChain, AutoGen, and CrewAI frameworks.</p>
+      </div>
+      <div class="roadmap-step">
+        <span class="roadmap-tag">PHASE 4</span>
+        <h3>Mainnet & Trust Layer</h3>
+        <p>On-chain Reputation Engine release. Staking and slashing protocols activated for commercial agent operations.</p>
+      </div>
+      <div class="roadmap-step">
+        <span class="roadmap-tag">PHASE 5</span>
+        <h3>Scaling & Governance</h3>
+        <p>L2 app-chain migration for high-throughput sub-cent execution. Complete transition to community DAO governance.</p>
+      </div>
+    </div>
+  </div>
+</section>
+<footer>
+  <div class="wrap">
+    <p>© 2026 AXON Protocol. All rights reserved.</p>
+  </div>
+</footer>
+</body>
+</html>
