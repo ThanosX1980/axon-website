@@ -209,6 +209,81 @@
 
   .section-divider {width: 100%;height: 1px;background: linear-gradient(90deg, transparent, var(--line-glow), transparent);margin: 30px 0;}
 
+  /* SDK Terminal Styles */
+  .sdk-terminal-wrap {
+    max-width: 900px;
+    margin: 0 auto;
+    background: rgba(13, 19, 38, 0.85);
+    border: 1px solid var(--line-glow);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+    backdrop-filter: blur(16px);
+  }
+  .terminal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 20px;
+    background: rgba(8, 12, 24, 0.95);
+    border-bottom: 1px solid var(--line);
+  }
+  .terminal-tabs {
+    display: flex;
+    gap: 8px;
+  }
+  .term-tab {
+    background: transparent;
+    border: 1px solid var(--line);
+    color: var(--text-dim);
+    padding: 6px 16px;
+    border-radius: 8px;
+    font-size: 12px;
+    font-family: 'IBM Plex Mono', monospace;
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+  .term-tab:hover {
+    color: var(--text);
+    border-color: var(--line-glow);
+  }
+  .term-tab.active {
+    background: rgba(6, 182, 212, 0.12);
+    border-color: var(--signal-2);
+    color: var(--signal-2);
+    text-shadow: 0 0 8px rgba(6,182,212,0.4);
+  }
+  .terminal-dots {
+    display: flex;
+    gap: 6px;
+  }
+  .term-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+  }
+  .term-dot.red { background: #EF4444; }
+  .term-dot.yellow { background: #F59E0B; }
+  .term-dot.green { background: #10B981; }
+  
+  .terminal-body {
+    padding: 24px;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13.5px;
+    line-height: 1.7;
+    overflow-x: auto;
+  }
+  .code-pane { display: none; }
+  .code-pane.active { display: block; }
+  
+  /* Syntax Highlighting Sim */
+  .code-kw { color: #8B5CF6; }
+  .code-fn { color: #06B6D4; }
+  .code-str { color: #10B981; }
+  .code-comm { color: #64748B; font-style: italic; }
+  .code-var { color: #F8FAFC; }
+  .code-num { color: #F59E0B; }
+
   .tokenomics-wrap{ 
     background: var(--bg-panel);border: 1px solid var(--line-glow);border-radius: 24px;padding: 32px;
     display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: center;box-shadow: 0 15px 40px rgba(0,0,0,0.4);
@@ -283,6 +358,7 @@
   <div class="nav-links">
     <a href="#about">About</a>
     <a href="#primitives">Architecture</a>
+    <a href="#sdk">SDK</a>
     <a href="#docs">Documentation</a>
     <a href="#tokenomics">Tokenomics</a>
     <a href="#roadmap">Roadmap</a>
@@ -352,6 +428,76 @@
         <div class="card-icon-box"><svg fill="none" stroke-width="2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path></svg></div>
         <h3>04. Machine Reputation Engine</h3>
         <p>On-chain dynamic trust scores generated through task output execution records and slashable AXN collateral bonds.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<section class="section" id="sdk">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="kicker">Developer First</div>
+      <h2>Instant Agent Integration</h2>
+      <p>Deploy decentralized escrow and identity verification with just a few lines of code using the AXON SDK.</p>
+    </div>
+
+    <div class="sdk-terminal-wrap">
+      <div class="terminal-header">
+        <div class="terminal-tabs">
+          <button class="term-tab active" onclick="switchTab(event, 'python')">axon_agent.py</button>
+          <button class="term-tab" onclick="switchTab(event, 'js')">axon-agent.js</button>
+          <button class="term-tab" onclick="switchTab(event, 'cli')">terminal</button>
+        </div>
+        <div class="terminal-dots">
+          <div class="term-dot red"></div>
+          <div class="term-dot yellow"></div>
+          <div class="term-dot green"></div>
+        </div>
+      </div>
+
+      <div class="terminal-body">
+        <!-- Python Pane -->
+        <div id="pane-python" class="code-pane active">
+          <span class="code-comm"># Initialize autonomous agent settlement via AXON Protocol</span><br>
+          <span class="code-kw">from</span> axon_sdk <span class="code-kw">import</span> AxonClient, EscrowCondition<br><br>
+          <span class="code-comm"># Authenticate with agent private key or bearer token</span><br>
+          <span class="code-var">client</span> = <span class="code-fn">AxonClient</span>(api_key=<span class="code-str">"axon_live_98f2...b1"</span>, network=<span class="code-str">"bsc"</span>)<br><br>
+          <span class="code-comm"># Create trustless escrow for sub-task compute verification</span><br>
+          <span class="code-var">escrow</span> = <span class="code-var">client</span>.escrow.<span class="code-fn">create</span>(<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;agent_id=<span class="code-str">"agent_oracle_09"</span>,<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;amount=<span class="code-num">0.05</span>,  <span class="code-comm"># AXN / BNB</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;condition=<span class="code-fn">EscrowCondition</span>.VERIFIED_API_RESPONSE<br>
+          )<br><br>
+          <span class="code-kw">print</span>(<span class="code-str">f"Escrow locked on-chain. TxHash: {escrow.tx_hash}"</span>)
+        </div>
+
+        <!-- JavaScript Pane -->
+        <div id="pane-js" class="code-pane">
+          <span class="code-comm">// Import AXON protocol web3 SDK</span><br>
+          <span class="code-kw">import</span> { <span class="code-var">AxonClient</span>, <span class="code-var">EscrowCondition</span> } <span class="code-kw">from</span> <span class="code-str">"@axon-protocol/sdk"</span>;<br><br>
+          <span class="code-comm">// Connect agent environment</span><br>
+          <span class="code-kw">const</span> <span class="code-var">client</span> = <span class="code-kw">new</span> <span class="code-fn">AxonClient</span>({ apiKey: <span class="code-str">"axon_live_98f2...b1"</span>, network: <span class="code-str">"bsc"</span> });<br><br>
+          <span class="code-kw">async function</span> <span class="code-fn">executeTask</span>() {<br>
+          &nbsp;&nbsp;<span class="code-kw">const</span> <span class="code-var">tx</span> = <span class="code-kw">await</span> <span class="code-var">client</span>.escrow.create({<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;agentId: <span class="code-str">"agent_data_feed"</span>,<br>
+          &nbsp;&nbsp;&nbsp;&nbsp;amount: <span class="code-num">150</span>, <span class="code-comm">// AXN tokens</span><br>
+          &nbsp;&nbsp;&nbsp;&nbsp;condition: <span class="code-var">EscrowCondition</span>.ZK_PROOF_VALIDATED<br>
+          &nbsp;&nbsp;});<br>
+          &nbsp;&nbsp;<span class="code-fn">console.log</span>(<span class="code-str">`Autonomous settlement successful: ${tx.id}`</span>);<br>
+          }
+        </div>
+
+        <!-- CLI Pane -->
+        <div id="pane-cli" class="code-pane">
+          <span class="code-comm"># Install AXON CLI global package</span><br>
+          $ npm install -g @axon-protocol/cli<br><br>
+          <span class="code-comm"># Register your autonomous AI agent on-chain</span><br>
+          $ axon agent register --name <span class="code-str">"LLM-Research-Agent"</span> --stake <span class="code-num">500</span> --network bsc<br>
+          <span class="code-str">✔ Agent registered successfully! ID: 0x4f8...b29</span><br>
+          <span class="code-str">✔ Staked 500 AXN collateral bond (Reputation Score: 100)</span>
+        </div>
       </div>
     </div>
   </div>
@@ -440,6 +586,14 @@
 </footer>
 
 <script>
+  // Terminal Tab Switcher
+  function switchTab(evt, lang) {
+    document.querySelectorAll('.code-pane').forEach(pane => pane.classList.remove('active'));
+    document.querySelectorAll('.term-tab').forEach(tab => tab.classList.remove('active'));
+    document.getElementById('pane-' + lang).classList.add('active');
+    evt.currentTarget.classList.add('active');
+  }
+
   // Dynamic Web3 Particle Background Animation
   const canvas = document.getElementById('particle-canvas');
   const ctx = canvas.getContext('2d');
