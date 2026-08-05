@@ -82,6 +82,7 @@
     100% { transform: translate(-60px, -50px) scale(1.18); }
   }
 
+  /* Refined Watermark & Grid Backdrops */
   .protocol-watermark {
     position: fixed;
     top: 50%;
@@ -206,6 +207,8 @@
   .card p{font-size:15px;color:var(--text-dim);line-height: 1.7;}
   @media(max-width:768px){.grid-2x2{grid-template-columns:1fr;}}
 
+  .section-divider {width: 100%;height: 1px;background: linear-gradient(90deg, transparent, var(--line-glow), transparent);margin: 30px 0;}
+
   /* SDK Terminal Styles */
   .sdk-terminal-wrap {
     max-width: 900px;
@@ -225,24 +228,29 @@
     background: rgba(8, 12, 24, 0.95);
     border-bottom: 1px solid var(--line);
     gap: 12px;
-    flex-wrap: wrap;
   }
   .terminal-tabs {
     display: flex;
     gap: 6px;
-    flex-wrap: wrap;
+    overflow-x: auto;
+    max-width: 100%;
+    padding-bottom: 2px;
+  }
+  .terminal-tabs::-webkit-scrollbar {
+    display: none;
   }
   .term-tab {
     background: transparent;
     border: 1px solid var(--line);
     color: var(--text-dim);
-    padding: 5px 12px;
+    padding: 6px 12px;
     border-radius: 8px;
     font-size: 11.5px;
     font-family: 'IBM Plex Mono', monospace;
     cursor: pointer;
     transition: all 0.25s ease;
     white-space: nowrap;
+    flex-shrink: 0;
   }
   .term-tab:hover {
     color: var(--text);
@@ -257,6 +265,7 @@
   .terminal-dots {
     display: flex;
     gap: 6px;
+    flex-shrink: 0;
   }
   .term-dot {
     width: 10px;
@@ -270,7 +279,7 @@
   .terminal-body {
     padding: 20px 16px;
     font-family: 'IBM Plex Mono', monospace;
-    font-size: 12.5px;
+    font-size: 12px;
     line-height: 1.6;
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
@@ -279,14 +288,13 @@
   .code-pane { display: none; }
   .code-pane.active { display: block; }
   
+  /* Syntax Highlighting Sim */
   .code-kw { color: #8B5CF6; }
   .code-fn { color: #06B6D4; }
   .code-str { color: #10B981; }
   .code-comm { color: #64748B; font-style: italic; }
   .code-var { color: #F8FAFC; }
   .code-num { color: #F59E0B; }
-
-  .section-divider {width: 100%;height: 1px;background: linear-gradient(90deg, transparent, var(--line-glow), transparent);margin: 30px 0;}
 
   .tokenomics-wrap{ 
     background: var(--bg-panel);border: 1px solid var(--line-glow);border-radius: 24px;padding: 32px;
@@ -463,45 +471,45 @@
 
       <div class="terminal-body">
         <!-- Python Pane -->
-        <div id="pane-python" class="code-pane active">
-          <span class="code-comm"># Initialize autonomous agent settlement via AXON Protocol</span><br>
-          <span class="code-kw">from</span> axon_sdk <span class="code-kw">import</span> AxonClient, EscrowCondition<br><br>
-          <span class="code-comm"># Authenticate with agent private key or bearer token</span><br>
-          <span class="code-var">client</span> = <span class="code-fn">AxonClient</span>(api_key=<span class="code-str">"axon_live_98f2...b1"</span>, network=<span class="code-str">"bsc"</span>)<br><br>
-          <span class="code-comm"># Create trustless escrow for sub-task compute verification</span><br>
-          <span class="code-var">escrow</span> = <span class="code-var">client</span>.escrow.<span class="code-fn">create</span>(<br>
-          &nbsp;&nbsp;&nbsp;&nbsp;agent_id=<span class="code-str">"agent_oracle_09"</span>,<br>
-          &nbsp;&nbsp;&nbsp;&nbsp;amount=<span class="code-num">0.05</span>,  <span class="code-comm"># AXN / BNB</span><br>
-          &nbsp;&nbsp;&nbsp;&nbsp;condition=<span class="code-fn">EscrowCondition</span>.VERIFIED_API_RESPONSE<br>
-          )<br><br>
-          <span class="code-kw">print</span>(<span class="code-str">f"Escrow locked on-chain. TxHash: {escrow.tx_hash}"</span>)
-        </div>
+        <div id="pane-python" class="code-pane active"><span class="code-comm"># Initialize autonomous agent settlement via AXON Protocol</span>
+<span class="code-kw">from</span> axon_sdk <span class="code-kw">import</span> AxonClient, EscrowCondition
+
+<span class="code-comm"># Authenticate with agent private key or bearer token</span>
+<span class="code-var">client</span> = <span class="code-fn">AxonClient</span>(api_key=<span class="code-str">"axon_live_98f2...b1"</span>, network=<span class="code-str">"bsc"</span>)
+
+<span class="code-comm"># Create trustless escrow for sub-task compute verification</span>
+<span class="code-var">escrow</span> = <span class="code-var">client</span>.escrow.<span class="code-fn">create</span>(
+    agent_id=<span class="code-str">"agent_oracle_09"</span>,
+    amount=<span class="code-num">0.05</span>,  <span class="code-comm"># AXN / BNB</span>
+    condition=<span class="code-fn">EscrowCondition</span>.VERIFIED_API_RESPONSE
+)
+
+<span class="code-kw">print</span>(<span class="code-str">f"Escrow locked on-chain. TxHash: {escrow.tx_hash}"</span>)</div>
 
         <!-- JavaScript Pane -->
-        <div id="pane-js" class="code-pane">
-          <span class="code-comm">// Import AXON protocol web3 SDK</span><br>
-          <span class="code-kw">import</span> { <span class="code-var">AxonClient</span>, <span class="code-var">EscrowCondition</span> } <span class="code-kw">from</span> <span class="code-str">"@axon-protocol/sdk"</span>;<br><br>
-          <span class="code-comm">// Connect agent environment</span><br>
-          <span class="code-kw">const</span> <span class="code-var">client</span> = <span class="code-kw">new</span> <span class="code-fn">AxonClient</span>({ apiKey: <span class="code-str">"axon_live_98f2...b1"</span>, network: <span class="code-str">"bsc"</span> });<br><br>
-          <span class="code-kw">async function</span> <span class="code-fn">executeTask</span>() {<br>
-          &nbsp;&nbsp;<span class="code-kw">const</span> <span class="code-var">tx</span> = <span class="code-kw">await</span> <span class="code-var">client</span>.escrow.create({<br>
-          &nbsp;&nbsp;&nbsp;&nbsp;agentId: <span class="code-str">"agent_data_feed"</span>,<br>
-          &nbsp;&nbsp;&nbsp;&nbsp;amount: <span class="code-num">150</span>, <span class="code-comm">// AXN tokens</span><br>
-          &nbsp;&nbsp;&nbsp;&nbsp;condition: <span class="code-var">EscrowCondition</span>.ZK_PROOF_VALIDATED<br>
-          &nbsp;&nbsp;});<br>
-          &nbsp;&nbsp;<span class="code-fn">console.log</span>(<span class="code-str">`Autonomous settlement successful: ${tx.id}`</span>);<br>
-          }
-        </div>
+        <div id="pane-js" class="code-pane"><span class="code-comm">// Import AXON protocol web3 SDK</span>
+<span class="code-kw">import</span> { <span class="code-var">AxonClient</span>, <span class="code-var">EscrowCondition</span> } <span class="code-kw">from</span> <span class="code-str">"@axon-protocol/sdk"</span>;
+
+<span class="code-comm">// Connect agent environment</span>
+<span class="code-kw">const</span> <span class="code-var">client</span> = <span class="code-kw">new</span> <span class="code-fn">AxonClient</span>({ apiKey: <span class="code-str">"axon_live_98f2...b1"</span>, network: <span class="code-str">"bsc"</span> });
+
+<span class="code-kw">async function</span> <span class="code-fn">executeTask</span>() {
+  <span class="code-kw">const</span> <span class="code-var">tx</span> = <span class="code-kw">await</span> <span class="code-var">client</span>.escrow.create({
+    agentId: <span class="code-str">"agent_data_feed"</span>,
+    amount: <span class="code-num">150</span>, <span class="code-comm">// AXN tokens</span>
+    condition: <span class="code-var">EscrowCondition</span>.ZK_PROOF_VALIDATED
+  });
+  <span class="code-fn">console.log</span>(<span class="code-str">`Autonomous settlement successful: ${tx.id}`</span>);
+}</div>
 
         <!-- CLI Pane -->
-        <div id="pane-cli" class="code-pane">
-          <span class="code-comm"># Install AXON CLI global package</span><br>
-          $ npm install -g @axon-protocol/cli<br><br>
-          <span class="code-comm"># Register your autonomous AI agent on-chain</span><br>
-          $ axon agent register --name <span class="code-str">"LLM-Research-Agent"</span> --stake <span class="code-num">500</span> --network bsc<br>
-          <span class="code-str">✔ Agent registered successfully! ID: 0x4f8...b29</span><br>
-          <span class="code-str">✔ Staked 500 AXN collateral bond (Reputation Score: 100)</span>
-        </div>
+        <div id="pane-cli" class="code-pane"><span class="code-comm"># Install AXON CLI global package</span>
+$ npm install -g @axon-protocol/cli
+
+<span class="code-comm"># Register your autonomous AI agent on-chain</span>
+$ axon agent register --name <span class="code-str">"LLM-Research-Agent"</span> --stake <span class="code-num">500</span> --network bsc
+<span class="code-str">✔ Agent registered successfully! ID: 0x4f8...b29</span>
+<span class="code-str">✔ Staked 500 AXN collateral bond (Reputation Score: 100)</span></div>
       </div>
     </div>
   </div>
@@ -590,6 +598,7 @@
 </footer>
 
 <script>
+  // Terminal Tab Switcher
   function switchTab(evt, lang) {
     document.querySelectorAll('.code-pane').forEach(pane => pane.classList.remove('active'));
     document.querySelectorAll('.term-tab').forEach(tab => tab.classList.remove('active'));
@@ -597,6 +606,7 @@
     evt.currentTarget.classList.add('active');
   }
 
+  // Dynamic Web3 Particle Background Animation
   const canvas = document.getElementById('particle-canvas');
   const ctx = canvas.getContext('2d');
 
