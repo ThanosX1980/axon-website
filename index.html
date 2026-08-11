@@ -387,8 +387,8 @@
     
     <div class="hero-ctas">
       <a href="https://axon-presale.vercel.app/" target="_blank" class="btn btn-primary">Enter Presale Portal →</a>
-      <a href="axon-whitepaper.pdf" download class="btn btn-secondary">📄 Download Whitepaper</a>
-      <a href="axon-tokenomics.pdf" download class="btn btn-ghost">📊 Download Tokenomics</a>
+      <a href="AXON_Whitepaper_v2.1.pdf" download class="btn btn-secondary">📄 Download Whitepaper</a>
+      <a href="AXON_Tokenomics_v2.1.pdf" download class="btn btn-ghost">📊 Download Tokenomics</a>
     </div>
 
     <div class="stats">
@@ -525,9 +525,9 @@ $ axon agent register --name <span class="code-str">"LLM-Research-Agent"</span> 
       <p>Review the protocol specification, token economics, and technical roadmap.</p>
     </div>
     <div class="hero-ctas">
-      <a href="axon-whitepaper.pdf" download class="btn btn-secondary">📄 Download Whitepaper (PDF)</a>
-      <a href="axon-tokenomics.pdf" download class="btn btn-secondary">📊 Download Tokenomics Sheet (PDF)</a>
-      <a href="axon-roadmap.pdf" download class="btn btn-secondary">🗺️ Download Roadmap (PDF)</a>
+      <a href="AXON_Whitepaper_v2.1.pdf" download class="btn btn-secondary">📄 Download Whitepaper (PDF)</a>
+      <a href="AXON_Tokenomics_v2.1.pdf" download class="btn btn-secondary">📊 Download Tokenomics Sheet (PDF)</a>
+      <a href="AXON_Roadmap_v2.1.pdf" download class="btn btn-secondary">🗺️ Download Roadmap (PDF)</a>
     </div>
   </div>
 </section>
@@ -576,7 +576,7 @@ $ axon agent register --name <span class="code-str">"LLM-Research-Agent"</span> 
       <h2>Core Team</h2>
     </div>
     <div class="team-container">
-      <img src="axon-team.png.PNG" alt="AXON Protocol Core Team" class="team-img">
+      <img src="axon-team.png" alt="AXON Protocol Core Team" class="team-img" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'800\' height=\'400\'><rect width=\'100%\' height=\'100%\' fill=\'%230D1326\'/><text x=\'50%\' y=\'50%\' fill=\'%2306B6D4\' font-family=\'Space Grotesk, sans-serif\' font-size=\'24\' text-anchor=\'middle\' dominant-baseline=\'middle\'>AXON Core Team</text></svg>'">
     </div>
   </div>
 </section>
@@ -608,76 +608,78 @@ $ axon agent register --name <span class="code-str">"LLM-Research-Agent"</span> 
 
   // Dynamic Web3 Particle Background Animation
   const canvas = document.getElementById('particle-canvas');
-  const ctx = canvas.getContext('2d');
+  if (canvas) {
+    const ctx = canvas.getContext('2d');
 
-  let particlesArray;
-  let width = canvas.width = window.innerWidth;
-  let height = canvas.height = window.innerHeight;
+    let particlesArray;
+    let width = canvas.width = window.innerWidth;
+    let height = canvas.height = window.innerHeight;
 
-  window.addEventListener('resize', () => {
-    width = canvas.width = window.innerWidth;
-    height = canvas.height = window.innerHeight;
-    init();
-  });
+    window.addEventListener('resize', () => {
+      width = canvas.width = window.innerWidth;
+      height = canvas.height = window.innerHeight;
+      init();
+    });
 
-  class Particle {
-    constructor() {
-      this.x = Math.random() * width;
-      this.y = Math.random() * height;
-      this.size = Math.random() * 2 + 1;
-      this.speedX = (Math.random() - 0.5) * 0.6;
-      this.speedY = (Math.random() - 0.5) * 0.6;
-    }
-    update() {
-      this.x += this.speedX;
-      this.y += this.speedY;
-      if (this.x > width) this.x = 0;
-      else if (this.x < 0) this.x = width;
-      if (this.y > height) this.y = 0;
-      else if (this.y < 0) this.y = height;
-    }
-    draw() {
-      ctx.fillStyle = 'rgba(6, 182, 212, 0.5)';
-      ctx.beginPath();
-      ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-      ctx.fill();
-    }
-  }
-
-  function init() {
-    particlesArray = [];
-    let numberOfParticles = (width * height) / 15000;
-    for (let i = 0; i < numberOfParticles; i++) {
-      particlesArray.push(new Particle());
-    }
-  }
-
-  function animate() {
-    ctx.clearRect(0, 0, width, height);
-    for (let i = 0; i < particlesArray.length; i++) {
-      particlesArray[i].update();
-      particlesArray[i].draw();
-
-      for (let j = i; j < particlesArray.length; j++) {
-        let dx = particlesArray[i].x - particlesArray5[j].x; // fixed reference if needed or standard math
-        let dy = particlesArray[i].y - particlesArray[j].y;
-        let distance = Math.sqrt(dx * dx + dy * dy);
-
-        if (distance < 110) {
-          ctx.strokeStyle = `rgba(139, 92, 246, ${0.15 * (1 - distance / 110)})`;
-          ctx.lineWidth = 1;
-          ctx.beginPath();
-          ctx.moveTo(particlesArray[i].x, particlesArray[i].y);
-          ctx.lineTo(particlesArray[j].x, particlesArray[j].y);
-          ctx.stroke();
-        }
+    class Particle {
+      constructor() {
+        this.x = Math.random() * width;
+        this.y = Math.random() * height;
+        this.size = Math.random() * 2 + 1;
+        this.speedX = (Math.random() - 0.5) * 0.6;
+        this.speedY = (Math.random() - 0.5) * 0.6;
+      }
+      update() {
+        this.x += this.speedX;
+        this.y += this.speedY;
+        if (this.x > width) this.x = 0;
+        else if (this.x < 0) this.x = width;
+        if (this.y > height) this.y = 0;
+        else if (this.y < 0) this.y = height;
+      }
+      draw() {
+        ctx.fillStyle = 'rgba(6, 182, 212, 0.5)';
+        ctx.beginPath();
+        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+        ctx.fill();
       }
     }
-    requestAnimationFrame(animate);
-  }
 
-  init();
-  animate();
+    function init() {
+      particlesArray = [];
+      let numberOfParticles = (width * height) / 15000;
+      for (let i = 0; i < numberOfParticles; i++) {
+        particlesArray.push(new Particle());
+      }
+    }
+
+    function animate() {
+      ctx.clearRect(0, 0, width, height);
+      for (let i = 0; i < particlesArray.length; i++) {
+        particlesArray[i].update();
+        particlesArray[i].draw();
+
+        for (let j = i; j < particlesArray.length; j++) {
+          let dx = particlesArray[i].x - particlesArray[j].x;
+          let dy = particlesArray[i].y - particlesArray[j].y;
+          let distance = Math.sqrt(dx * dx + dy * dy);
+
+          if (distance < 110) {
+            ctx.strokeStyle = `rgba(139, 92, 246, ${0.15 * (1 - distance / 110)})`;
+            ctx.lineWidth = 1;
+            ctx.beginPath();
+            ctx.moveTo(particlesArray[i].x, particlesArray[i].y);
+            ctx.lineTo(particlesArray[j].x, particlesArray[j].y);
+            ctx.stroke();
+          }
+        }
+      }
+      requestAnimationFrame(animate);
+    }
+
+    init();
+    animate();
+  }
 </script>
 
 </body>
