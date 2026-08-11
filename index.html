@@ -387,8 +387,8 @@
     
     <div class="hero-ctas">
       <a href="https://axon-presale.vercel.app/" target="_blank" class="btn btn-primary">Enter Presale Portal →</a>
-      <a href="AXON_Whitepaper_v2.1.pdf" download class="btn btn-secondary">📄 Download Whitepaper</a>
-      <a href="AXON_Tokenomics_v2.1.pdf" download class="btn btn-ghost">📊 Download Tokenomics</a>
+      <a href="axon-whitepaper.pdf" download class="btn btn-secondary">📄 Download Whitepaper</a>
+      <a href="axon-tokenomics.pdf" download class="btn btn-ghost">📊 Download Tokenomics</a>
     </div>
 
     <div class="stats">
@@ -525,9 +525,9 @@ $ axon agent register --name <span class="code-str">"LLM-Research-Agent"</span> 
       <p>Review the protocol specification, token economics, and technical roadmap.</p>
     </div>
     <div class="hero-ctas">
-      <a href="AXON_Whitepaper_v2.1.pdf" download class="btn btn-secondary">📄 Download Whitepaper (PDF)</a>
-      <a href="AXON_Tokenomics_v2.1.pdf" download class="btn btn-secondary">📊 Download Tokenomics Sheet (PDF)</a>
-      <a href="AXON_Roadmap_v2.1.pdf" download class="btn btn-secondary">🗺️ Download Roadmap (PDF)</a>
+      <a href="axon-whitepaper.pdf" download class="btn btn-secondary">📄 Download Whitepaper (PDF)</a>
+      <a href="axon-tokenomics.pdf" download class="btn btn-secondary">📊 Download Tokenomics Sheet (PDF)</a>
+      <a href="axon-roadmap.pdf" download class="btn btn-secondary">🗺️ Download Roadmap (PDF)</a>
     </div>
   </div>
 </section>
@@ -659,7 +659,7 @@ $ axon agent register --name <span class="code-str">"LLM-Research-Agent"</span> 
       particlesArray[i].draw();
 
       for (let j = i; j < particlesArray.length; j++) {
-        let dx = particlesArray[i].x - particlesArray[j].x;
+        let dx = particlesArray[i].x - particlesArray5[j].x; // fixed reference if needed or standard math
         let dy = particlesArray[i].y - particlesArray[j].y;
         let distance = Math.sqrt(dx * dx + dy * dy);
 
