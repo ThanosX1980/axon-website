@@ -209,55 +209,123 @@
 
   .section-divider {width: 100%;height: 1px;background: linear-gradient(90deg, transparent, var(--line-glow), transparent);margin: 30px 0;}
 
-  /* AXON Slide Presentation Styles */
+  /* AXON Slide Presentation Styles (Fixed Interactive Slider) */
   .axon-slide-section {
     position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 10vh 9vw;
+    padding: 80px 24px;
     text-align: center;
     background: var(--bg);
     color: var(--text);
-    font-family: 'Source Serif 4', Georgia, serif;
     border-top: 1px solid var(--line);
     border-bottom: 1px solid var(--line);
+  }
+  .slides-container {
+    max-width: 800px;
+    width: 100%;
+    position: relative;
+    background: var(--bg-panel);
+    border: 1px solid var(--line-glow);
+    border-radius: 24px;
+    padding: 48px 36px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+    backdrop-filter: blur(16px);
+  }
+  .slide {
+    display: none;
+    animation: fadeIn 0.4s ease-in-out;
+  }
+  .slide.active {
+    display: block;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
   }
   .axon-slide-section .eyebrow {
     font-family: 'IBM Plex Mono', monospace;
     font-size: 12px;
     letter-spacing: 0.22em;
     text-transform: uppercase;
-    color: #C99A5B;
-    margin-bottom: 22px;
+    color: var(--signal-2);
+    margin-bottom: 18px;
   }
   .axon-slide-section h2 {
     font-family: 'Space Grotesk', sans-serif;
     font-weight: 600;
-    font-size: clamp(28px, 4.4vw, 54px);
-    line-height: 1.12;
-    margin: 0 0 20px 0;
-    max-width: 16ch;
+    font-size: clamp(26px, 4vw, 44px);
+    line-height: 1.15;
+    margin: 0 0 16px 0;
     color: #FFF;
   }
   .axon-slide-section .lede {
     color: var(--text-dim);
-    font-size: clamp(15px, 1.35vw, 19px);
+    font-size: clamp(15px, 1.2vw, 18px);
     line-height: 1.6;
-    max-width: 56ch;
+    max-width: 52ch;
     margin: 0 auto;
     font-family: 'Inter', sans-serif;
   }
   .axon-slide-section .logo-wrap {
-    width: 132px; height: 132px;
-    margin-bottom: 34px;
+    width: 110px; height: 110px;
+    margin: 0 auto 24px auto;
     border-radius: 50%;
     overflow: hidden;
     border: 1px solid var(--line-glow);
     box-shadow: 0 0 25px rgba(6, 182, 212, 0.3);
+    background: #090B16;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
-  .axon-slide-section .logo-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .axon-slide-section .logo-wrap svg { width: 70%; height: 70%; }
+  
+  .slide-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 32px;
+    padding-top: 20px;
+    border-top: 1px solid var(--line);
+  }
+  .slide-btn {
+    background: rgba(13, 19, 38, 0.9);
+    border: 1px solid var(--line-glow);
+    color: var(--text);
+    padding: 8px 18px;
+    border-radius: 10px;
+    cursor: pointer;
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13px;
+    transition: all 0.25s ease;
+  }
+  .slide-btn:hover {
+    background: var(--signal-2);
+    color: #030408;
+    border-color: var(--signal-2);
+    box-shadow: 0 0 15px rgba(6,182,212,0.5);
+  }
+  .slide-indicators {
+    display: flex;
+    gap: 8px;
+  }
+  .indicator {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--line);
+    cursor: pointer;
+    transition: all 0.25s ease;
+  }
+  .indicator.active {
+    background: var(--signal-2);
+    box-shadow: 0 0 8px var(--signal-2);
+    width: 24px;
+    border-radius: 4px;
+  }
 
   /* SDK Terminal Styles */
   .sdk-terminal-wrap {
@@ -455,13 +523,49 @@
 
 <div class="section-divider"></div>
 
+<!-- FIXED INTERACTIVE SLIDE SECTION -->
 <section class="axon-slide-section">
-  <div class="logo-wrap">
-    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABgAAAAQACAYAAAAncZJCAABhUmNhQlgAAGFSanVtYgAAAB5qdW1kYzJwYQARABCAAACqADibcQNjMnBhAAAAYSxqdW1iAAAAR2p1bWRjMm1hABEAEIAAAKoAOJtxA3VybjpjMnBhOmJlYmQwZGJmLTJiZDMtNGViNy05NDFiLTFiMGZjYzY5YTZmMQAAABf1anVtYgAAAClqdW1kYzJhcwARABCAAACqADibcQNjMnBhLmFzc2VydGlvbnMAAAAJ0Wp1bWIAAAA7anVtZEDLDDK7ikidpwsq1vR/Q2kTYzJwYS5pY29uAAAAABhjMnNoyrxamYlbQ/RJWbuwvNCOaAAAABdiZmRiAGltYWdlL3N2Zyt4bWwAAAAJd2JpZGI8c3ZnIHdpZHRoPSI3MTYiIGhlaWdodD0iNzE2IiB2aWV3Qm94PSIwIDAgNzE2IDcxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTUwOC43NDkgMzE3LjM5OUM1MT6Nzc3IDI4Ny4zMTQgNTA4Ljk5MSAyNTMuODg0IDQ4NS4zODkgMjMwLjI4MkM0NjEuNzg4IDIwNi4yODEgQzI4My4zNjAgMTk4Ljg5NSAzOTguMjczIDIwNi45MjNDMzc2LjIzMSAxODQuOTI4IDM0My4zOSA3NC45NTYgMzExLjE0OCAxODMuNTk2QzI3OC45MDYgMTkyLjIzNCAyNTUuNDUgMjE3LjI5MiAyNDcuMzYgMjQ3LjM2MUMyMTcuMjkxIDI1NS40NTEgMTkyLjIzMyAyNzguOTEgMTgzLjU5NSAzMTEuMTQ5QzE3NC45NTcgMzQzLjM5MSAxODQuOTI3IDM3Ni4yMzIgMjA2LjkyNCAzOTguMjc0QzE5OC44OTYgNDI4LjM1OSAyMDYuNjgzIDQ2MS43ODkgMjMwLjI4NCA0ODUuMzkxQzI1My44ODUgNTA4Ljk5MiAyODcuMzEzIDUxNi43NzkgMzE3LjQwMSA1MDguNzVDMzM5LjQ0MiA1MzAuNzQ1IDM3Mi4yODYgNTQwLjcxNyA0MDQuNTI1IDUzMi4wNzlDNDM2Ljc2NyA1MjMuNDQxIDQ2MC4yMjMgNDk4LjM4NCA0NjguMzEzIDQ2OC4zMTVDNDk4LjM4MyA0NjAuMjI0IDUyMy40NCA0MzYuNzY2IDUzMi4wNzggNDA0LjUyMkM1NDAuNzE2IDM3Mi4yODUgNTMwLjc0NyAzMzkuNDQzIDUwOC43NDkgMzE3LjQwMlYzMTcuMzlZTTQ3MC44OTkgMjQ0Ljc3NkM0ODYuODkyIDI2MC43NyA0OTkuNDg4IDI4Mi42MDEgNDkwLjY4NyAzMDkuNDEyTDQxNS41NzcgMjYwLjA0NkM0MTIuNDExIDI1OC4yMTggNDA4LjUwOSAyNTguMjE4IDQwNS4zNDUgMjYwLjA0NkwzMTcuNDAxIDMxMC44MlYyNzcuNTI2QzMxNy40MDEgMjc1LjE5MSAzMTguNjUyIDI3My4wMDUgMzIwLjY3NiAyNzEuODM3TDM4Ny42NDQgMjMzLjE3NEM0MTQuMTc4IDIxOC4zNTMgNDQ4LjM0NiAyMjIuMjIzIDQ3MC45MDEgMjQ0Ljc3Nkg0NzAuODk5Wk0zNTcuODM3IDMxMS4xNDRM..." alt="AXON Protocol Logo">
+  <div class="slides-container">
+    <!-- Slide 1 -->
+    <div class="slide active" id="slide-1">
+      <div class="logo-wrap">
+        <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="50" cy="50" r="45" fill="none" stroke="url(#axonGlow)" stroke-width="3"/>
+          <circle cx="50" cy="24" r="4" fill="#06B6D4"/>
+          <path d="M50 42 L32 60 M50 42 L68 60" stroke="url(#axonGlow)" stroke-width="3.5" stroke-linecap="round"/>
+          <circle cx="50" cy="67" r="4.5" fill="#FFFFFF"/>
+        </svg>
+      </div>
+      <div class="eyebrow">Factual Record &bull; Core Architecture</div>
+      <h2>AXON Protocol</h2>
+      <p class="lede">Autonomous payment systems and decentralized utility infrastructure on the BNB Smart Chain.</p>
+    </div>
+
+    <!-- Slide 2 -->
+    <div class="slide" id="slide-2">
+      <div class="eyebrow">Slide 2 &bull; Trustless Settlement</div>
+      <h2>Machine-to-Machine Microtransactions</h2>
+      <p class="lede">Eliminating human bottlenecks with cryptographic guarantees and automated escrow smart contracts.</p>
+    </div>
+
+    <!-- Slide 3 -->
+    <div class="slide" id="slide-3">
+      <div class="eyebrow">Slide 3 &bull; Ecosystem Scale</div>
+      <h2>DeFi & Agent Convergence</h2>
+      <p class="lede">Powering the next generation of autonomous workloads with high-speed execution and verifiable validation.</p>
+    </div>
+
+    <!-- Slide Controls -->
+    <div class="slide-controls">
+      <button class="slide-btn" onclick="changeSlide(-1)">← Prev</button>
+      <div class="slide-indicators">
+        <span class="indicator active" onclick="currentSlide(1)"></span>
+        <span class="indicator" onclick="currentSlide(2)"></span>
+        <span class="indicator" onclick="currentSlide(3)"></span>
+      </div>
+      <button class="slide-btn" onclick="changeSlide(1)">Next →</button>
+    </div>
   </div>
-  <div class="eyebrow">Factual Record &bull; Core Architecture</div>
-  <h2>AXON Protocol</h2>
-  <p class="lede">Autonomous payment systems and decentralized utility infrastructure on the BNB Smart Chain.</p>
 </section>
 
 <div class="section-divider"></div>
@@ -662,6 +766,33 @@ $ axon agent register --name <span class="code-str">"LLM-Research-Agent"</span> 
 </footer>
 
 <script>
+  // Slide Management Script
+  let slideIndex = 1;
+  showSlides(slideIndex);
+
+  function changeSlide(n) {
+    showSlides(slideIndex += n);
+  }
+
+  function currentSlide(n) {
+    showSlides(slideIndex = n);
+  }
+
+  function showSlides(n) {
+    let slides = document.getElementsByClassName("slide");
+    let dots = document.getElementsByClassName("indicator");
+    if (n > slides.length) { slideIndex = 1; }
+    if (n < 1) { slideIndex = slides.length; }
+    for (let i = 0; i < slides.length; i++) {
+      slides[i].classList.remove("active");
+    }
+    for (let i = 0; i < dots.length; i++) {
+      dots[i].classList.remove("active");
+    }
+    slides[slideIndex - 1].classList.add("active");
+    dots[slideIndex - 1].classList.add("active");
+  }
+
   // Terminal Tab Switcher
   function switchTab(evt, lang) {
     document.querySelectorAll('.code-pane').forEach(pane => pane.classList.remove('active'));
