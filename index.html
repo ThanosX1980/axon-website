@@ -1,5 +1,3 @@
-Website code 8-15
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,7 +5,7 @@ Website code 8-15
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>AXON Protocol — AI-Agent Economy Infrastructure</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
 <style>
   :root { 
     --bg: #030408; 
@@ -211,6 +209,56 @@ Website code 8-15
 
   .section-divider {width: 100%;height: 1px;background: linear-gradient(90deg, transparent, var(--line-glow), transparent);margin: 30px 0;}
 
+  /* AXON Slide Presentation Styles */
+  .axon-slide-section {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10vh 9vw;
+    text-align: center;
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Source Serif 4', Georgia, serif;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+  }
+  .axon-slide-section .eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #C99A5B;
+    margin-bottom: 22px;
+  }
+  .axon-slide-section h2 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 600;
+    font-size: clamp(28px, 4.4vw, 54px);
+    line-height: 1.12;
+    margin: 0 0 20px 0;
+    max-width: 16ch;
+    color: #FFF;
+  }
+  .axon-slide-section .lede {
+    color: var(--text-dim);
+    font-size: clamp(15px, 1.35vw, 19px);
+    line-height: 1.6;
+    max-width: 56ch;
+    margin: 0 auto;
+    font-family: 'Inter', sans-serif;
+  }
+  .axon-slide-section .logo-wrap {
+    width: 132px; height: 132px;
+    margin-bottom: 34px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 1px solid var(--line-glow);
+    box-shadow: 0 0 25px rgba(6, 182, 212, 0.3);
+  }
+  .axon-slide-section .logo-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
   /* SDK Terminal Styles */
   .sdk-terminal-wrap {
     max-width: 900px;
@@ -403,6 +451,17 @@ Website code 8-15
       <div class="stat"><div class="val">BSC</div><div class="lbl">Deployment Network</div></div>
     </div>
   </div>
+</section>
+
+<div class="section-divider"></div>
+
+<section class="axon-slide-section">
+  <div class="logo-wrap">
+    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABgAAAAQACAYAAAAncZJCAABhUmNhQlgAAGFSanVtYgAAAB5qdW1kYzJwYQARABCAAACqADibcQNjMnBhAAAAYSxqdW1iAAAAR2p1bWRjMm1hABEAEIAAAKoAOJtxA3VybjpjMnBhOmJlYmQwZGJmLTJiZDMtNGViNy05NDFiLTFiMGZjYzY5YTZmMQAAABf1anVtYgAAAClqdW1kYzJhcwARABCAAACqADibcQNjMnBhLmFzc2VydGlvbnMAAAAJ0Wp1bWIAAAA7anVtZEDLDDK7ikidpwsq1vR/Q2kTYzJwYS5pY29uAAAAABhjMnNoyrxamYlbQ/RJWbuwvNCOaAAAABdiZmRiAGltYWdlL3N2Zyt4bWwAAAAJd2JpZGI8c3ZnIHdpZHRoPSI3MTYiIGhlaWdodD0iNzE2IiB2aWV3Qm94PSIwIDAgNzE2IDcxNiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTUwOC43NDkgMzE3LjM5OUM1MT6Nzc3IDI4Ny4zMTQgNTA4Ljk5MSAyNTMuODg0IDQ4NS4zODkgMjMwLjI4MkM0NjEuNzg4IDIwNi4yODEgQzI4My4zNjAgMTk4Ljg5NSAzOTguMjczIDIwNi45MjNDMzc2LjIzMSAxODQuOTI4IDM0My4zOSA3NC45NTYgMzExLjE0OCAxODMuNTk2QzI3OC45MDYgMTkyLjIzNCAyNTUuNDUgMjE3LjI5MiAyNDcuMzYgMjQ3LjM2MUMyMTcuMjkxIDI1NS40NTEgMTkyLjIzMyAyNzguOTEgMTgzLjU5NSAzMTEuMTQ5QzE3NC45NTcgMzQzLjM5MSAxODQuOTI3IDM3Ni4yMzIgMjA2LjkyNCAzOTguMjc0QzE5OC44OTYgNDI4LjM1OSAyMDYuNjgzIDQ2MS43ODkgMjMwLjI4NCA0ODUuMzkxQzI1My44ODUgNTA4Ljk5MiAyODcuMzEzIDUxNi43NzkgMzE3LjQwMSA1MDguNzVDMzM5LjQ0MiA1MzAuNzQ1IDM3Mi4yODYgNTQwLjcxNyA0MDQuNTI1IDUzMi4wNzlDNDM2Ljc2NyA1MjMuNDQxIDQ2MC4yMjMgNDk4LjM4NCA0NjguMzEzIDQ2OC4zMTVDNDk4LjM4MyA0NjAuMjI0IDUyMy40NCA0MzYuNzY2IDUzMi4wNzggNDA0LjUyMkM1NDAuNzE2IDM3Mi4yODUgNTMwLjc0NyAzMzkuNDQzIDUwOC43NDkgMzE3LjQwMlYzMTcuMzlZTTQ3MC44OTkgMjQ0Ljc3NkM0ODYuODkyIDI2MC43NyA0OTkuNDg4IDI4Mi42MDEgNDkwLjY4NyAzMDkuNDEyTDQxNS41NzcgMjYwLjA0NkM0MTIuNDExIDI1OC4yMTggNDA4LjUwOSAyNTguMjE4IDQwNS4zNDUgMjYwLjA0NkwzMTcuNDAxIDMxMC44MlYyNzcuNTI2QzMxNy40MDEgMjc1LjE5MSAzMTguNjUyIDI3My4wMDUgMzIwLjY3NiAyNzEuODM3TDM4Ny42NDQgMjMzLjE3NEM0MTQuMTc4IDIxOC4zNTMgNDQ4LjM0NiAyMjIuMjIzIDQ3MC45MDEgMjQ0Ljc3Nkg0NzAuODk5Wk0zNTcuODM3IDMxMS4xNDRM..." alt="AXON Protocol Logo">
+  </div>
+  <div class="eyebrow">Factual Record &bull; Core Architecture</div>
+  <h2>AXON Protocol</h2>
+  <p class="lede">Autonomous payment systems and decentralized utility infrastructure on the BNB Smart Chain.</p>
 </section>
 
 <div class="section-divider"></div>
